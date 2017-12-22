@@ -1,0 +1,58 @@
+/* $Version: $1.0.11$ */
+wdetect is a signature-based, access-point detection tool for
+finding devices on the *wired* network.  This includes, currently:
+
+* An SNMP signature-based detection module
+
+* An FTP signature-based port banner detection module
+
+* An HTTP signature-based port banner detection module
+
+* A Telnet signature-based port banner detection module
+
+* A generic SNMP/FTP/HTTP/Telnet heuristic banner filter 
+
+* A module that checks for known default UserID/Password pairs
+  for access points
+
+Signatures are updated at least once a month, while a company
+is under a valid support contract.
+
+
+**** CONFIGURATION AND USAGE ******
+
+This is a really simple program
+
+1) edit wdetect.conf and add your network
+	Example, 
+		network : 10.10.8.1-10.10.15.255
+		network : 192.168.0.0-192.168.255.255
+
+There's no limit on how many networks you can add.  
+
+***NOTE*** : DO *not* add more than one class B (or /16)
+	     network per 'network' declaration.  If you have
+	     multiple class B networks, use separate entries
+	     for each line.
+
+
+2) *Optional* - edit start.pl and increase or decrease your 
+   thread count.  NOTE: threads cannot exceed 255.  I recommend 64 
+
+   NOTE : 64 threads is, in my opinion, optimal.  Against a firewalled
+	  host, the check will take between 6 and 7 seconds (max).  This 
+	  means that you will blow through a fully firewalled Class C
+	  in less than 28 seconds.  
+
+3) To generate a plaintext report, run
+	./start.pl > report.txt
+
+   To generate an html report, run
+	./start.pl html > report.html
+
+
+
+That's it.  Enjoy the program.  As new wireless signatures are released
+we will send a modified binary.
+
+
